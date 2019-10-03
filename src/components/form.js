@@ -2,15 +2,15 @@ import React, { useState, useEffect, useReducer } from "react"
 import Image from "./image"
 
 const HookForm = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [name, setName] = useState("")
+  const [state, updateState] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { name: "", email: "", password: "" }
+  )
   ///////////////////////////////
   ///////////////////////////////
   ///////////////////////////////
   ///////////////////////////////
-
-  
+  const { name, email, password } = state
 
   return (
     <>
@@ -25,27 +25,21 @@ const HookForm = () => {
               label="password"
               placeholder="Name"
               value={name}
-              onChange={e => 
-                setName(e.target.value)
-              }
+              onChange={e => updateState({ name: e.target.value })}
             />
             <input
               name="email"
               label="password"
               placeholder="Email"
               value={email}
-              onChange={e => 
-                setEmail(e.target.value)
-              }
+              onChange={e => updateState({ email: e.target.value })}
             />
             <input
               name="password"
               label="password"
               value={password}
               placeholder="************"
-              onChange={e => 
-                setPassword(e.target.value)
-              }
+              onChange={e => updateState({ password: e.target.value })}
             />
             <button type="submit">Submit</button>
           </form>
